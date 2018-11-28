@@ -1,0 +1,16 @@
+This is a simple PHP web application in docker container.
+
+Build the image, under this directory
+```
+docker build -t local/php-sql-sample:1.0 .
+```
+
+Run web application
+```
+docker run -it -p 9080:80 local/php-sql-sample01:1.0
+```
+
+Access UI
+```
+http://localhost:9080
+```
