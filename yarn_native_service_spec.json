@@ -1,0 +1,50 @@
+{
+  "name": "volumeexample01",
+  "version": "1.0.0",
+  "description": "a volume simple example",
+  "components" :
+    [{
+        "name": "volume",
+        "number_of_containers": 1,
+        "artifact": {
+          "id": "local/php-sql-sample",
+          "type": "DOCKER"
+        },
+        "placement_policy": {
+          "constraints": [
+            {
+              "type": "ANTI_AFFINITY",
+              "scope": "NODE",
+              "target_tags": ["volume"]
+            }
+          ]
+        },
+        "run_privileged_container": "true",
+        "launch_command": "docker-php-entrypoint,apache2-foreground",
+        "configuration": {
+          "env": {
+            "YARN_CONTAINER_RUNTIME_DOCKER_RUN_OVERRIDE_DISABLE":"true"
+          }
+        },
+        "resource": {
+          "cpus": 1,
+          "memory": "256",
+          "additional": {
+            "yarn.io/csi-volume": {
+              "value": 1,
+              "unit": "Gi",
+              "tags": ["system:csi-volume"],
+              "attributes" : {
+                "volume.id" : "csi-volume-01",
+                "driver.name" : "ch.ctrox.csi.s3-driver",
+                "volume.mount" : "/mnt/data"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "quicklinks": {
+    "Apache HTTP Server": "http://volume-0.${SERVICE_NAME}.${USER}.${DOMAIN}:80"
+  }
+}
