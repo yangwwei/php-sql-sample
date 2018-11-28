@@ -4,9 +4,10 @@
   </head>
   <body>
   <?php
-  $db = new SQLite3('/mnt/data/sample.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+  $db = new SQLite3('/tmp/sample.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
   $results = $db->query('SELECT * FROM "emp"');
 
+  echo "<h2>Following table content is loaded from SQLite3 database, db file: /mnt/data/sample.db</h2>"
   echo "<table border='1'>
     <tr>
       <th>Employ NO</th>
